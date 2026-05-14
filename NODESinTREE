@@ -1,0 +1,35 @@
+#include<iostream>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node *left,*right;
+    Node(int val){
+        data=val;
+        left=right=NULL;
+    }
+};
+
+Node *Create(){
+    int x;
+    cin>>x;
+    if(x==-1)return NULL;
+    Node *node = new Node(x);
+    node->left=Create();
+    node->right=Create();
+    return node;
+}
+int Total(Node *root,int count){
+    if(root==NULL)return 0;         //for -1 add 0 to the count
+    
+    return (1+Total(root->left,count)+Total(root->right,count)); 
+    // 1 for root + take all the number from left + total number from right;
+}
+
+int main(){
+    int count=0;
+    Node *root = Create();
+    cout<<Total(root,count);
+
+}
